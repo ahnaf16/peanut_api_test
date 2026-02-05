@@ -73,9 +73,14 @@ class DashboardView extends HookConsumerWidget {
                       leverage: account.leverage,
                     ),
                   ),
-                  const SliverGap(Insets.xl),
-                  Text('Open Trades', style: context.text.titleMedium).toSliver(),
                   const SliverGap(Insets.sm),
+                  Row(
+                    spacing: Insets.sm,
+                    children: [
+                      Expanded(child: Text('Open Trades', style: context.text.titleMedium)),
+                      TextButton(onPressed: () => RPaths.trades.push(context), child: const Text('View')),
+                    ],
+                  ).toSliver(),
 
                   tradesData.when(
                     loading: () => const Center(child: CircularProgressIndicator()).toSliver(),

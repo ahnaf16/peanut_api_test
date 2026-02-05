@@ -97,3 +97,44 @@ abstract class _$PhoneDigitCtrl extends $AsyncNotifier<String?> {
     element.handleCreate(ref, build);
   }
 }
+
+@ProviderFor(totalTradesProfit)
+final totalTradesProfitProvider = TotalTradesProfitProvider._();
+
+final class TotalTradesProfitProvider
+    extends $FunctionalProvider<double, double, double>
+    with $Provider<double> {
+  TotalTradesProfitProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'totalTradesProfitProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$totalTradesProfitHash();
+
+  @$internal
+  @override
+  $ProviderElement<double> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  double create(Ref ref) {
+    return totalTradesProfit(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(double value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<double>(value),
+    );
+  }
+}
+
+String _$totalTradesProfitHash() => r'7d6b5d2ba593db3ff7c3c9b9836cb368cd4b1627';

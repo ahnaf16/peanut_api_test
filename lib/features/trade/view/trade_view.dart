@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:peanut_api_test/features/trade/controller/trade_ctrl.dart';
 import 'package:peanut_api_test/features/trade/view/trade_card.dart';
+import 'package:peanut_api_test/features/trade/view/trade_profit_header.dart';
+import 'package:peanut_api_test/main.export.dart';
 
 class TradeView extends HookConsumerWidget {
   const TradeView({super.key});
@@ -10,33 +11,31 @@ class TradeView extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final tradesAsync = ref.watch(tradeCtrlProvider);
 
-    return tradesAsync.when(
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (e, stack) => Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('Failed to load trades'),
-            TextButton(onPressed: () => ref.invalidate(tradeCtrlProvider), child: const Text('Retry')),
-          ],
+    return Scaffold(
+      appBar: AppBar(title: const Text('Open Trades')),
+      body: RefreshIndicator(
+        onRefresh: () => ref.refresh(tradeCtrlProvider.future),
+        child: tradesAsync.when(
+          loading: () => const Center(child: CircularProgressIndicator()),
+          error: (e, st) => Center(child: Text('Error: $e')),
+          data: (trades) => ListView(
+            padding: Pads.lg(),
+            children: [
+              const TotalTradesProfitHeader(),
+              const Gap(Insets.sm),
+              Text(
+                '${trades.length} Active Positions',
+                style: const TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
+              ),
+              const Gap(Insets.sm),
+
+              ...trades.map((trade) => TradeCard(trade: trade)).gapBy(Insets.med),
+
+              const Gap(Insets.lg),
+            ],
+          ),
         ),
       ),
-      data: (trades) {
-        if (trades.isEmpty) {
-          return const Center(child: Text('No open trades'));
-        }
-        return RefreshIndicator(
-          onRefresh: () async => ref.invalidate(tradeCtrlProvider),
-          child: ListView.separated(
-            padding: const EdgeInsets.only(top: 8, bottom: 80),
-            itemCount: trades.length,
-            separatorBuilder: (context, index) => const SizedBox(height: 4),
-            itemBuilder: (context, index) {
-              return TradeCard(trade: trades[index]);
-            },
-          ),
-        );
-      },
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:peanut_api_test/features/profile/repository/profile_repo.dart';
+import 'package:peanut_api_test/features/trade/controller/trade_ctrl.dart';
 import 'package:peanut_api_test/main.export.dart';
 import 'package:peanut_api_test/models/user/account_info_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -26,3 +27,21 @@ class PhoneDigitCtrl extends _$PhoneDigitCtrl {
     return res.fold((l) => null, (r) => r);
   }
 }
+
+@riverpod
+double totalTradesProfit(Ref ref) {
+  final tradesAsync = ref.watch(tradeCtrlProvider);
+  return tradesAsync.maybeWhen(
+    data: (trades) => trades.fold(0.0, (sum, trade) => sum + trade.profit.toDouble()),
+    orElse: () => 0.0,
+  );
+}
+
+// final totalOpenTradesProfitProvider = Provider<double>((ref) {
+//   final tradesAsync = ref.watch(tradeCtrlProvider);
+
+//   return tradesAsync.maybeWhen(
+//     data: (trades) => trades.fold(0.0, (sum, trade) => sum + trade.profit.toDouble()),
+//     orElse: () => 0.0,
+//   );
+// });
