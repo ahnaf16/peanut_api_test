@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
-import 'package:post_wagens/main.export.dart';
+import 'package:peanut_api_test/main.export.dart';
 
 extension ValueEx on ValueNotifier<bool> {
   void toggle() => value = !value;

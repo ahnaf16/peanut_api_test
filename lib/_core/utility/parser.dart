@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:post_wagens/main.export.dart';
+import 'package:peanut_api_test/main.export.dart';
 
 class Parser {
   const Parser._();

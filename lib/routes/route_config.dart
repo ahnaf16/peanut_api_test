@@ -1,19 +1,19 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:post_wagens/app_root.dart';
-import 'package:post_wagens/features/auth/controller/auth_ctrl.dart';
-import 'package:post_wagens/features/auth/view/auth_verification_view.dart';
-import 'package:post_wagens/features/auth/view/login_view.dart';
-import 'package:post_wagens/features/auth/view/reset_password_view.dart';
-import 'package:post_wagens/features/auth/view/sign_up_view.dart';
-import 'package:post_wagens/features/chat/view/chat_view.dart';
-import 'package:post_wagens/features/home/view/home_view.dart';
-import 'package:post_wagens/features/onboarding/view/welcome_view.dart';
-import 'package:post_wagens/features/profile/view/profile_view.dart';
-import 'package:post_wagens/features/search/view/search_view.dart';
-import 'package:post_wagens/features/settings/view/language_view.dart';
-import 'package:post_wagens/navigation/nav_root.dart';
+import 'package:peanut_api_test/app_root.dart';
+import 'package:peanut_api_test/features/auth/controller/auth_ctrl.dart';
+import 'package:peanut_api_test/features/auth/view/auth_verification_view.dart';
+import 'package:peanut_api_test/features/auth/view/login_view.dart';
+import 'package:peanut_api_test/features/auth/view/reset_password_view.dart';
+import 'package:peanut_api_test/features/auth/view/sign_up_view.dart';
+import 'package:peanut_api_test/features/chat/view/chat_view.dart';
+import 'package:peanut_api_test/features/home/view/home_view.dart';
+import 'package:peanut_api_test/features/onboarding/view/welcome_view.dart';
+import 'package:peanut_api_test/features/profile/view/profile_view.dart';
+import 'package:peanut_api_test/features/search/view/search_view.dart';
+import 'package:peanut_api_test/features/settings/view/language_view.dart';
+import 'package:peanut_api_test/navigation/nav_root.dart';
 
 import '../features/auth/view/check_email_view.dart';
 import '../main.export.dart';

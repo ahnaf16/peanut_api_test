@@ -1,4 +1,4 @@
-import 'package:post_wagens/models/item/item_model.dart';
+import 'package:peanut_api_test/models/item/item_model.dart';
 
 class AnalyticsModel {
   final ItemModel item;

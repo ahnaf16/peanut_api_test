@@ -1,8 +1,7 @@
 import 'package:get_it/get_it.dart';
-import 'package:post_wagens/features/auth/repository/auth_repo.dart';
+import 'package:peanut_api_test/features/auth/repository/auth_repo.dart';
 
 import 'main.export.dart';
-
 
 final locate = GetIt.instance;
 

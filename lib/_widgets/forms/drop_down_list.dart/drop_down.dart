@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:post_wagens/main.export.dart';
+import 'package:peanut_api_test/main.export.dart';
 
 /// A callback function that is invoked when items are selected
 typedef ItemSelectionCallBack<T> = void Function(List<SelectedListItem<T>> selectedItems);

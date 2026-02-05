@@ -1,8 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:post_wagens/_core/strings/assets.gen.dart';
-import 'package:post_wagens/main.export.dart';
-import 'package:post_wagens/models/user/user_model.dart';
+import 'package:peanut_api_test/_core/strings/assets.gen.dart';
+import 'package:peanut_api_test/main.export.dart';
+import 'package:peanut_api_test/models/user/user_model.dart';
 
 class LoginView extends HookConsumerWidget {
   const LoginView({super.key});

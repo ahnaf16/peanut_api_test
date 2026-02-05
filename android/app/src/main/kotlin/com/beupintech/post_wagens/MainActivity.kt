@@ -1,4 +1,4 @@
-package com.beupintech.post_wagens
+package com.beupintech.peanut_api_test
 
 import io.flutter.embedding.android.FlutterActivity
 

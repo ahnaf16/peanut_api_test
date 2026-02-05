@@ -1,4 +1,4 @@
-import 'package:post_wagens/models/base/paged_item.dart';
+import 'package:peanut_api_test/models/base/paged_item.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 mixin PagedAsyncMixin<T> on $AsyncNotifier<PagedItem<T>> {

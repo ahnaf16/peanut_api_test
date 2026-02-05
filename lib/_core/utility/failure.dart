@@ -1,4 +1,4 @@
-import 'package:post_wagens/main.export.dart';
+import 'package:peanut_api_test/main.export.dart';
 
 typedef Report<T> = Either<Failure, T>;
 typedef FutureReport<T> = Future<Report<T>>;

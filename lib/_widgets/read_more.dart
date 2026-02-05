@@ -1,6 +1,6 @@
 import 'package:animated_read_more_text/animated_read_more_text.dart';
 import 'package:flutter/material.dart';
-import 'package:post_wagens/main.export.dart';
+import 'package:peanut_api_test/main.export.dart';
 
 class ReadMore extends StatelessWidget {
   const ReadMore(this.text, {super.key, this.style, this.maxLines = 3, this.moreText, this.lessText});

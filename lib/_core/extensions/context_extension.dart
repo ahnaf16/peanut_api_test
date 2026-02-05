@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:post_wagens/theme/x_colors.dart';
+import 'package:peanut_api_test/theme/x_colors.dart';
 
 extension RouteEx on BuildContext {
   GoRouter get route => GoRouter.of(this);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:post_wagens/main.export.dart';
-import 'package:post_wagens/models/user/user_model.dart';
+import 'package:peanut_api_test/main.export.dart';
+import 'package:peanut_api_test/models/user/user_model.dart';
 import 'package:textf/textf.dart';
 
 class AuthVerificationView extends HookConsumerWidget {

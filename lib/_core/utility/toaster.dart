@@ -1,7 +1,7 @@
 // import 'package:flutter/foundation.dart';
 // import 'package:flutter/material.dart';
-// import 'package:post_wagens/_core/logging/cat.dart';
-// import 'package:post_wagens/_core/utility/failure.dart';
+// import 'package:peanut_api_test/_core/logging/cat.dart';
+// import 'package:peanut_api_test/_core/utility/failure.dart';
 // import 'package:recase/recase.dart';
 // import 'package:toastification/toastification.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:post_wagens/main.export.dart';
-import 'package:post_wagens/models/item/item_model.dart';
-import 'package:post_wagens/models/user/user_model.dart';
+import 'package:peanut_api_test/main.export.dart';
+import 'package:peanut_api_test/models/item/item_model.dart';
+import 'package:peanut_api_test/models/user/user_model.dart';
 
 enum NotificationType {
   social,

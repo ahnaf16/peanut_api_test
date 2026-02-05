@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:post_wagens/main.export.dart';
+import 'package:peanut_api_test/main.export.dart';
 
 export 'package:dio/dio.dart';
 

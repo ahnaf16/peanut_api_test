@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:post_wagens/main.export.dart';
+import 'package:peanut_api_test/main.export.dart';
 
 class SlidingIconNavbar extends StatelessWidget {
   final List<IconData> icons;
@@ -24,10 +24,7 @@ class SlidingIconNavbar extends StatelessWidget {
     this.overlayBuilder,
     this.height = kBottomNavigationBarHeight,
     this.animationDuration = const Duration(milliseconds: 300),
-  }) : assert(
-         icons.length == labels.length,
-         'Icons and Labels must be the same length',
-       );
+  }) : assert(icons.length == labels.length, 'Icons and Labels must be the same length');
 
   @override
   Widget build(BuildContext context) {
@@ -58,9 +55,7 @@ class SlidingIconNavbar extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: sliderColor,
                   borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(color: Colors.black.op(0.05), blurRadius: 10),
-                  ],
+                  boxShadow: [BoxShadow(color: Colors.black.op(0.05), blurRadius: 10)],
                 ),
               ),
             ),
@@ -87,17 +82,11 @@ class SlidingIconNavbar extends StatelessWidget {
                 child: Center(
                   child: AnimatedContainer(
                     duration: animationDuration,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 8,
-                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(
-                          icons[index],
-                          color: isSelected ? activeColor : inactiveColor,
-                        ),
+                        Icon(icons[index], color: isSelected ? activeColor : inactiveColor),
                         ClipRect(
                           child: AnimatedSize(
                             duration: animationDuration,
@@ -108,9 +97,7 @@ class SlidingIconNavbar extends StatelessWidget {
                                     child: Text(
                                       labels[index],
                                       style: context.text.bodyMedium!.textColor(
-                                        isSelected
-                                            ? activeColor
-                                            : inactiveColor,
+                                        isSelected ? activeColor : inactiveColor,
                                       ),
                                     ),
                                   )

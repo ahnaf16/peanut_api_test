@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:post_wagens/main.export.dart';
+import 'package:peanut_api_test/main.export.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 class ErrorView extends HookConsumerWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:post_wagens/main.export.dart';
-import 'package:post_wagens/navigation/sliding_icon_navbar.dart';
+import 'package:peanut_api_test/main.export.dart';
+import 'package:peanut_api_test/navigation/sliding_icon_navbar.dart';
 
 class NavigationRoot extends HookConsumerWidget {
   const NavigationRoot(this.child, {super.key});
@@ -17,10 +17,7 @@ class NavigationRoot extends HookConsumerWidget {
       RPaths.profile: const _NavDest(icon: LIcon.user, text: 'Profile'),
     };
 
-    final getIndex = destinations.keys
-        .map((e) => e?.name)
-        .toList()
-        .indexOf(rootPath);
+    final getIndex = destinations.keys.map((e) => e?.name).toList().indexOf(rootPath);
 
     final index = useState(0);
 
@@ -93,10 +90,7 @@ class _CenterNavButtons extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: .center,
                       spacing: Insets.sm,
-                      children: [
-                        Icon(LIcon.shoppingBag, size: 18),
-                        Text('Listing'),
-                      ],
+                      children: [Icon(LIcon.shoppingBag, size: 18), Text('Listing')],
                     ),
                   ),
                 ),
@@ -106,10 +100,7 @@ class _CenterNavButtons extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () => context.nPop(),
-          child: Container(
-            color: Colors.transparent,
-            height: context.padding.bottom + kBottomNavigationBarHeight + 14,
-          ),
+          child: Container(color: Colors.transparent, height: context.padding.bottom + kBottomNavigationBarHeight + 14),
         ),
       ],
     );
@@ -117,11 +108,7 @@ class _CenterNavButtons extends StatelessWidget {
 }
 
 class _NavDest {
-  const _NavDest({
-    required this.text,
-    required this.icon,
-    this.centered = false,
-  });
+  const _NavDest({required this.text, required this.icon, this.centered = false});
 
   final String text;
   final IconData icon;

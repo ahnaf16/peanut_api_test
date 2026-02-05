@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:post_wagens/main.export.dart';
+import 'package:peanut_api_test/main.export.dart';
 import 'package:universal_image/universal_image.dart';
 
 class UImage extends StatelessWidget {
@@ -74,8 +74,7 @@ class UImage extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: radius,
           color: backgroundColor,
-          border: Border.all(color: borderColor ?? Colors.transparent,width: borderWidth ?? 0),
-
+          border: Border.all(color: borderColor ?? Colors.transparent, width: borderWidth ?? 0),
         ),
         clipBehavior: Clip.hardEdge,
         child: UniversalImage(
@@ -85,12 +84,7 @@ class UImage extends StatelessWidget {
           size: size,
           fit: fit,
           color: color,
-          placeholder: const Center(
-            child: SizedBox.square(
-              dimension: 20,
-              child: CircularProgressIndicator(),
-            ),
-          ),
+          placeholder: const Center(child: SizedBox.square(dimension: 20, child: CircularProgressIndicator())),
           errorPlaceholder: Center(
             child: Icon(
               isAvatar ? Icons.person_outline : Icons.hide_image_outlined,
@@ -136,10 +130,7 @@ class PhotoViewWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return KHero(
       tag: image,
-      child: GestureDetector(
-        onTap: () => PhotoView.open(context, image),
-        child: child,
-      ),
+      child: GestureDetector(onTap: () => PhotoView.open(context, image), child: child),
     );
   }
 }

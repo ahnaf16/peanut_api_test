@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:post_wagens/main.export.dart';
+import 'package:peanut_api_test/main.export.dart';
 
 class WelcomeView extends HookConsumerWidget {
   const WelcomeView({super.key});
@@ -23,19 +23,11 @@ class WelcomeView extends HookConsumerWidget {
 
             const Spacer(),
 
-            Text(
-              'Locum Marketplace',
-              style: context.text.bodyMedium?.textColor(
-                context.colors.onPrimary,
-              ),
-            ),
+            Text('Locum Marketplace', style: context.text.bodyMedium?.textColor(context.colors.onPrimary)),
 
             const Gap(12),
 
-            CircularProgressIndicator(
-              color: context.colors.onPrimary,
-              strokeWidth: 3,
-            ),
+            CircularProgressIndicator(color: context.colors.onPrimary, strokeWidth: 3),
 
             const Spacer(),
           ],

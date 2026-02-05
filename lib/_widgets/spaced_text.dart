@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:post_wagens/main.export.dart';
+import 'package:peanut_api_test/main.export.dart';
 
 typedef StyleBuilder = (TextStyle, TextStyle) Function(TextStyle left, TextStyle right);
 

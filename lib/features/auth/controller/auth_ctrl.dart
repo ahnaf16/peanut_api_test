@@ -1,7 +1,7 @@
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:peanut_api_test/features/auth/repository/auth_repo.dart';
+import 'package:peanut_api_test/main.export.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:post_wagens/features/auth/repository/auth_repo.dart';
-import 'package:post_wagens/main.export.dart';
 
 part 'auth_ctrl.g.dart';
 

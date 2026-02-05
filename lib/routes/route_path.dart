@@ -1,4 +1,4 @@
-import 'package:post_wagens/routes/logic/app_route.dart';
+import 'package:peanut_api_test/routes/logic/app_route.dart';
 
 export 'package:go_router/go_router.dart';
 

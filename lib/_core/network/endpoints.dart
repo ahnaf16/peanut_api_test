@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:post_wagens/main.export.dart';
+import 'package:peanut_api_test/main.export.dart';
 
 extension type const EndPoint(String value) implements String {
   String queryParams(SMap query) {
@@ -16,7 +16,7 @@ class Endpoints {
   static bool get isTestUrl => testURL != null && !kReleaseMode;
 
   // base url
-  static const String _baseUrl = 'https://api.post_wagens.com';
+  static const String _baseUrl = 'https://api.peanut_api_test.com';
   static const String _apiSuffix = 'api/user';
 
   static String get _host => '${isTestUrl ? testURL : _baseUrl}';

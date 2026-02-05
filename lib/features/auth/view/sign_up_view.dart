@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:post_wagens/main.export.dart';
+import 'package:peanut_api_test/main.export.dart';
 
 class SignUpView extends HookConsumerWidget {
   const SignUpView({super.key});
@@ -15,11 +15,7 @@ class SignUpView extends HookConsumerWidget {
         children: [
           Column(
             children: [
-              DecoContainer(
-                height: 150,
-                width: double.infinity,
-                color: context.colors.primary,
-              ),
+              DecoContainer(height: 150, width: double.infinity, color: context.colors.primary),
               const Expanded(child: DecoContainer(width: double.infinity)),
             ],
           ),
@@ -33,17 +29,10 @@ class SignUpView extends HookConsumerWidget {
                   spacing: Insets.med,
                   children: [
                     Gap(context.padding.top),
-                    Text(
-                      'Create Account',
-                      style: context.text.headlineSmall?.bold.textColor(
-                        context.colors.onPrimary,
-                      ),
-                    ),
+                    Text('Create Account', style: context.text.headlineSmall?.bold.textColor(context.colors.onPrimary)),
                     Text(
                       'Join the Locum Marketplace',
-                      style: context.text.bodyMedium?.textColor(
-                        context.colors.onPrimary,
-                      ),
+                      style: context.text.bodyMedium?.textColor(context.colors.onPrimary),
                     ),
                     const Gap(20),
 
@@ -61,10 +50,7 @@ class SignUpView extends HookConsumerWidget {
                       title: 'Phone Number',
                     ),
 
-                    const OptionSelector(
-                      items: ['Pharmacy', 'Locum'],
-                      title: 'Register as',
-                    ),
+                    const OptionSelector(items: ['Pharmacy', 'Locum'], title: 'Register as'),
                     const KTextField(
                       prefixIcon: Icon(Icons.lock_outline),
                       name: 'password',
@@ -98,8 +84,7 @@ class SignUpView extends HookConsumerWidget {
                             TextSpan(
                               text: 'Log in',
                               style: context.text.bodyMedium?.bold,
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () => RPaths.login.push(context),
+                              recognizer: TapGestureRecognizer()..onTap = () => RPaths.login.push(context),
                             ),
                           ],
                         ),

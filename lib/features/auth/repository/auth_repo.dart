@@ -1,4 +1,4 @@
-import 'package:post_wagens/main.export.dart';
+import 'package:peanut_api_test/main.export.dart';
 
 class AuthRepo with ApiHandler {
   final _sp = locate<SP>();
@@ -18,6 +18,6 @@ class AuthRepo with ApiHandler {
   }
 
   Future<bool> _setToken(String? token) async {
-   return true;
+    return true;
   }
 }

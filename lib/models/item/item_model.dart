@@ -1,4 +1,4 @@
-import 'package:post_wagens/models/user/user_model.dart';
+import 'package:peanut_api_test/models/user/user_model.dart';
 
 class ItemModel {
   final String id;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:post_wagens/_core/utility/parser.dart';
+import 'package:peanut_api_test/_core/utility/parser.dart';
 
 extension MapEx<K, V> on Map<K, V> {
   Map<String, V> toStringKey() => map((k, v) => MapEntry('$k', v));
