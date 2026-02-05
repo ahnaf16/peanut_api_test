@@ -7,6 +7,7 @@ import 'package:peanut_api_test/features/auth/view/login_view.dart';
 import 'package:peanut_api_test/features/dashboard/view/dashboard_view.dart';
 import 'package:peanut_api_test/features/profile/view/profile_view.dart';
 import 'package:peanut_api_test/features/promotion/view/promotion_view.dart';
+import 'package:peanut_api_test/features/trade/view/trade_view.dart';
 import 'package:peanut_api_test/main.export.dart';
 import 'package:peanut_api_test/navigation/nav_root.dart';
 
@@ -37,6 +38,8 @@ class AppRouter extends Notifier<GoRouter> {
   List<RouteBase> get _routes => [
     //! auth
     AppRoute(RPaths.login, (_) => const LoginView()),
+
+    AppRoute(RPaths.trades, (_) => const TradeView()),
 
     ShellRoute(
       navigatorKey: _shellNavigator,

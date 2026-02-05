@@ -10,6 +10,7 @@ class RPaths {
 
   // dash
   static const dash = RPath('/dashboard');
+  static const trades = RPath('/trades');
 
   // promotions
   static const promotions = RPath('/promotions');
