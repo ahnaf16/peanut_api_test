@@ -9,14 +9,10 @@ class AppToast extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bgColor = switch (event.type) {
-      .success => context.xColors.successContainer,
-      .error => context.colors.errorContainer,
-      .info => context.colors.primaryContainer,
-    };
+    final bgColor = context.colors.surfaceContainer;
 
     final color = switch (event.type) {
-      .success => context.xColors.success,
+      .success => Colors.greenAccent,
       .error => context.colors.error,
       .info => context.colors.primary,
     };

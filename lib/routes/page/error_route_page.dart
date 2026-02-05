@@ -20,7 +20,7 @@ class ErrorRoutePage extends StatelessWidget {
             const SizedBox(height: 20),
             TextButton.icon(
               onPressed: () {
-                RPaths.home.go(context);
+                RPaths.dash.go(context);
               },
               icon: const Icon(Icons.arrow_back),
               label: const Text('Go Home'),

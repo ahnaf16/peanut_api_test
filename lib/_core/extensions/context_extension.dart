@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:peanut_api_test/theme/x_colors.dart';
 
 extension RouteEx on BuildContext {
   GoRouter get route => GoRouter.of(this);
@@ -53,10 +52,11 @@ extension ContextEx on BuildContext {
   TextTheme get text => TextTheme.of(this);
   ColorScheme get colors => ColorScheme.of(this);
 
-  XColors get xColors => theme.extension<XColors>()!;
-
   Brightness get bright => theme.brightness;
 
-  bool get isDark => bright == Brightness.dark;
-  bool get isLight => bright == Brightness.light;
+  bool get isDark => bright == .dark;
+  bool get isLight => bright == .light;
+
+  bool get isLandscape => mq.orientation == .landscape;
+  bool get isPortrait => mq.orientation == .portrait;
 }

@@ -3,28 +3,19 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:peanut_api_test/app_root.dart';
 import 'package:peanut_api_test/features/auth/controller/auth_ctrl.dart';
-import 'package:peanut_api_test/features/auth/view/auth_verification_view.dart';
 import 'package:peanut_api_test/features/auth/view/login_view.dart';
-import 'package:peanut_api_test/features/auth/view/reset_password_view.dart';
-import 'package:peanut_api_test/features/auth/view/sign_up_view.dart';
-import 'package:peanut_api_test/features/chat/view/chat_view.dart';
-import 'package:peanut_api_test/features/home/view/home_view.dart';
-import 'package:peanut_api_test/features/onboarding/view/welcome_view.dart';
+import 'package:peanut_api_test/features/dashboard/view/dashboard_view.dart';
 import 'package:peanut_api_test/features/profile/view/profile_view.dart';
-import 'package:peanut_api_test/features/search/view/search_view.dart';
-import 'package:peanut_api_test/features/settings/view/language_view.dart';
+import 'package:peanut_api_test/features/promotion/view/promotion_view.dart';
+import 'package:peanut_api_test/main.export.dart';
 import 'package:peanut_api_test/navigation/nav_root.dart';
 
-import '../features/auth/view/check_email_view.dart';
-import '../main.export.dart';
-
 typedef RouteRedirect = FutureOr<String?> Function(BuildContext, GoRouterState);
-String rootPath = RPaths.welcome.path;
+String rootPath = RPaths.dash.path;
 final routerProvider = NotifierProvider<AppRouter, GoRouter>(AppRouter.new);
 
 class AppRouter extends Notifier<GoRouter> {
   final _rootNavigator = GlobalKey<NavigatorState>(debugLabel: 'root');
-
   final _shellNavigator = GlobalKey<NavigatorState>(debugLabel: 'shell');
 
   GoRouter _appRouter(RouteRedirect? redirect) {
@@ -44,24 +35,15 @@ class AppRouter extends Notifier<GoRouter> {
 
   /// The app router list
   List<RouteBase> get _routes => [
-    AppRoute(RPaths.welcome, (_) => const WelcomeView()),
-
     //! auth
     AppRoute(RPaths.login, (_) => const LoginView()),
-    AppRoute(RPaths.signUp, (_) => const SignUpView()),
-    AppRoute(RPaths.resetPassword, (_) => const ResetPasswordView()),
-    AppRoute(RPaths.checkEmail, (_) => const CheckEmailView()),
-    AppRoute(RPaths.authVerification, (_) => const AuthVerificationView()),
-
-    AppRoute(RPaths.language, (_) => const LanguageView()),
 
     ShellRoute(
       navigatorKey: _shellNavigator,
       builder: (_, s, child) => NavigationRoot(child, key: s.pageKey),
       routes: [
-        AppRoute(RPaths.home, (_) => const HomeView()),
-        AppRoute(RPaths.search, (_) => const SearchView()),
-        AppRoute(RPaths.chat, (_) => const ChatView()),
+        AppRoute(RPaths.dash, (_) => const DashboardView()),
+        AppRoute(RPaths.promotions, (_) => const PromotionView()),
         AppRoute(RPaths.profile, (_) => const ProfileView()),
       ],
     ),

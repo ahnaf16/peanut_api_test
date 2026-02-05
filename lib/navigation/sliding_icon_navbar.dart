@@ -7,8 +7,10 @@ class SlidingIconNavbar extends StatelessWidget {
   final int currentIndex;
   final ValueChanged<int> onTap;
 
-  // New parameters for the overlay logic
+  /// toggles overlay at this index
   final int? showOverlayAt;
+
+  /// builds the overlay widget
   final WidgetBuilder? overlayBuilder;
 
   final double height;
@@ -43,7 +45,6 @@ class SlidingIconNavbar extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Stack(
         children: [
-          // 1. THE SLIDING BACKGROUND
           AnimatedAlign(
             duration: animationDuration,
             curve: Curves.easeInOutCubic,
@@ -61,7 +62,6 @@ class SlidingIconNavbar extends StatelessWidget {
             ),
           ),
 
-          // 2. THE ICONS & LABELS
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: List.generate(icons.length, (index) {

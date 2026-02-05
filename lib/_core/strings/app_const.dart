@@ -7,7 +7,7 @@ const kScrollPhysics = AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysi
 const _kPatchNo = 0;
 const kVersion = 'v1.0.0${_kPatchNo == 0 ? '' : '-p$_kPatchNo'}';
 
-const kAppName = 'Locumlense';
+const kAppName = 'Peanut';
 
 String kError([String? errorOn]) {
   String err = 'Something went wrong';

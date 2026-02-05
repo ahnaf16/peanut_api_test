@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:peanut_api_test/main.export.dart';
+import 'package:screwdriver/screwdriver.dart';
 import 'package:toastification/toastification.dart';
 
 enum ButtonType { primary, danger, outlined }
@@ -81,7 +81,7 @@ class SubmitButton extends HookWidget {
         }
       },
       child: AnimatedContainer(
-        duration: 250.ms,
+        duration: 250.milliseconds,
         padding: Pads.sym(dense ? 16 : 16, dense ? 6 : 8),
         height: dense ? 44 : 44,
         width: expanded ? context.width : null,
@@ -92,7 +92,7 @@ class SubmitButton extends HookWidget {
         child: IconTheme(
           data: IconThemeData(color: getContentColor(), size: 20),
           child: AnimatedSize(
-            duration: 250.ms,
+            duration: 250.milliseconds,
             child: Row(
               mainAxisSize: .min,
               mainAxisAlignment: .center,

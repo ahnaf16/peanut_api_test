@@ -10,15 +10,12 @@ Either<Failure, R> failure<R>(String msg, {Object? e, StackTrace? s}) {
 }
 
 class Failure {
-  const Failure(this.msg, {this.error, this.stackTrace, this.regular = false});
-  const Failure.regular(this.msg, {this.error, this.stackTrace}) : regular = true;
+  const Failure(this.msg, {this.error, this.stackTrace});
+  const Failure.regular(this.msg, {this.error, this.stackTrace});
 
   final String msg;
   final Object? error;
   final StackTrace? stackTrace;
-
-  /// a flag that indicates if this Failure was thrown manually.
-  final bool regular;
 
   @override
   String toString() => msg;
