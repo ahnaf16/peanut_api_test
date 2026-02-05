@@ -7,4 +7,6 @@ typedef SP = SharedPreferences;
 @SharedPref()
 class AppPref {
   String? token;
+  String? loginCode;
+  String? password;
 }

@@ -2,14 +2,27 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:peanut_api_test/main.export.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 mixin ApiHandler {
   DioClient get client => locate<DioClient>();
-  String? getToken() => locate<SP>().token.value;
+
+  QMap? getAuthData() {
+    final sp = locate<SP>();
+    final code = sp.loginCode.value;
+    final token = sp.token.value;
+
+    if (code == null || token == null) {
+      EvBus.instance.fireLogoutEv();
+      return null;
+    }
+
+    return {'login': code, 'token': token};
+  }
 
   FutureReport<T> handle<T>({
     required Future<Response> Function() call,
-    required T Function(Map<String, dynamic> map) mapper,
+    required FutureOr<T> Function(Map<String, dynamic> map) mapper,
   }) async {
     try {
       return handleRaw(
@@ -34,12 +47,12 @@ mixin ApiHandler {
 
   FutureReport<T> handleRaw<T>({
     required Future<Response> Function() call,
-    required T Function(dynamic map) mapper,
+    required FutureOr<T> Function(dynamic map) mapper,
   }) async {
     try {
       final Response(:statusCode, :data) = await call();
 
-      return right(mapper(data));
+      return right(await mapper(data));
     } on SocketException catch (e, st) {
       return failure(e.message, e: e, s: st);
     } on DioException catch (e) {

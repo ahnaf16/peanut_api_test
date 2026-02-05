@@ -8,7 +8,13 @@ extension AppPrefSpExt on SharedPreferences {
   SPValue<String> get token => SPValue<String>(
       key: 'token', getter: getString, setter: setString, remover: remove);
 
-  Set<SPValueBase> get entries => {token};
+  SPValue<String> get loginCode => SPValue<String>(
+      key: 'loginCode', getter: getString, setter: setString, remover: remove);
+
+  SPValue<String> get password => SPValue<String>(
+      key: 'password', getter: getString, setter: setString, remover: remove);
+
+  Set<SPValueBase> get entries => {token, loginCode, password};
 }
 
 

@@ -111,6 +111,10 @@ class DioClient {
       return handler.next(res);
     },
     onError: (err, handler) async {
+      if (err.response?.data == 'Access denied') {
+        EvBus.instance.fireLogoutEv();
+        return handler.next(err);
+      }
       return handler.next(err);
     },
   );

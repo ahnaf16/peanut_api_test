@@ -13,29 +13,35 @@ class ErrorView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-
-      children: [
-        const Icon(Icons.warning_amber_rounded, size: 50).clickable(onTap: () => catErr(runtimeType.toString(), e, st)),
-        const Gap(Insets.lg),
-        Text('Something went wrong', style: context.text.titleMedium, maxLines: 1),
-        if (kDebugMode)
-          Text(e.toString(), maxLines: 2, textAlign: TextAlign.center)
-        else
-          Text('Please try again', style: context.text.bodyLarge, maxLines: 1),
-        const Gap(Insets.xl),
-        if (prov.isNotEmpty)
-          OutlinedButton(
-            onPressed: () async {
-              for (final p in prov) {
-                ref.invalidate(p);
-              }
-              await reload?.call();
-            },
-            child: const Text('Try again'),
-          ),
-      ],
+    return SizedBox(
+      width: context.width,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: .center,
+        children: [
+          const Icon(
+            Icons.warning_amber_rounded,
+            size: 50,
+          ).clickable(onTap: () => catErr(runtimeType.toString(), e, st)),
+          const Gap(Insets.lg),
+          Text('Something went wrong', style: context.text.titleMedium, maxLines: 1),
+          if (kDebugMode)
+            Text(e.toString(), maxLines: 2, textAlign: TextAlign.center)
+          else
+            Text('Please try again', style: context.text.bodyLarge, maxLines: 1),
+          const Gap(Insets.xl),
+          if (prov.isNotEmpty)
+            OutlinedButton(
+              onPressed: () async {
+                for (final p in prov) {
+                  ref.invalidate(p);
+                }
+                await reload?.call();
+              },
+              child: const Text('Try again'),
+            ),
+        ],
+      ),
     );
   }
 }

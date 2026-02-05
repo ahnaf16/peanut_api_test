@@ -9,10 +9,11 @@ class AuthRepo with ApiHandler {
   FutureReport<bool> login(QMap data) async {
     return await handle(
       call: () => client.post(Endpoints.login, data: data),
-      mapper: (map) {
+      mapper: (map) async {
         if (map case {'result': final bool result, 'token': final String token}) {
           if (result && token.isNotBlank) {
-            _setToken(token);
+            await _setToken(token, data['login']);
+
             return true;
           }
         }
@@ -22,11 +23,12 @@ class AuthRepo with ApiHandler {
   }
 
   Future<bool> logout() async {
-    return _setToken(null);
+    return _setToken(null, null);
   }
 
-  Future<bool> _setToken(String? token) async {
+  Future<bool> _setToken(String? token, String? code) async {
     if (token == null) return _sp.token.remove();
+    if (code != null) await _sp.loginCode.setValue(code);
     return _sp.token.setValue(token);
   }
 }

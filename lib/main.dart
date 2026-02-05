@@ -11,7 +11,7 @@ void main() async {
     if ('${d.summary}'.contains('package:flutter/src/rendering/mouse_tracker.dart')) return;
     FlutterError.presentError(d);
   };
-  runApp(const ProviderScope(child: _App()));
+  runApp(ProviderScope(retry: (_, _) => null, child: const _App()));
 }
 
 class _App extends HookConsumerWidget {

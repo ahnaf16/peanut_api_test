@@ -21,6 +21,7 @@ abstract final class KAppTheme {
         alignedDropdown: true,
         navigationRailUseIndicator: true,
         defaultRadius: 10,
+        appBarCenterTitle: false,
       ),
 
       visualDensity: FlexColorScheme.comfortablePlatformDensity,
@@ -42,6 +43,7 @@ abstract final class KAppTheme {
       alignedDropdown: true,
       navigationRailUseIndicator: true,
       defaultRadius: 10,
+      appBarCenterTitle: false,
     ),
     visualDensity: FlexColorScheme.comfortablePlatformDensity,
     cupertinoOverrideTheme: const CupertinoThemeData(applyThemeToAll: true),
@@ -61,7 +63,7 @@ abstract final class KAppTheme {
         focusedBorder: inputBorder(focus: true),
         errorBorder: inputBorder(error: true),
       ),
-      appBarTheme: AppBarTheme(centerTitle: true, titleTextStyle: textTheme(isDark).bodyLarge?.semiBold),
+      appBarTheme: AppBarTheme(centerTitle: false, titleTextStyle: textTheme(isDark).bodyLarge?.semiBold),
     );
   }
 
