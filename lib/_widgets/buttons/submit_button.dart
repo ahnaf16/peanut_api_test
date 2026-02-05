@@ -79,6 +79,7 @@ class SubmitButton extends HookWidget {
           loading.falsey();
           rethrow;
         }
+        loading.falsey();
       },
       child: AnimatedContainer(
         duration: 250.milliseconds,

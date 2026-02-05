@@ -1,7 +1,6 @@
 import 'package:peanut_api_test/features/auth/repository/auth_repo.dart';
 import 'package:peanut_api_test/main.export.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:screwdriver/screwdriver.dart';
 
 part 'auth_ctrl.g.dart';
 
@@ -15,23 +14,13 @@ class AuthCtrl extends _$AuthCtrl {
   }
 
   FVoid login(QMap data) async {
-    await Future.delayed(2.seconds);
-    await _repo.login(data);
-    ref.invalidateSelf();
-    return;
-  }
-
-  FVoid signUp(QMap data) async {
-    await Future.delayed(2.seconds);
-    await _repo.signUp(data);
-    ref.invalidateSelf();
+    final res = await _repo.login(data);
+    res.fold((l) => toaster.showError('Login Failed', message: l.msg), (r) => ref.invalidateSelf());
     return;
   }
 
   FVoid logout() async {
-    await Future.delayed(2.seconds);
     await _repo.logout();
     ref.invalidateSelf();
-    return;
   }
 }

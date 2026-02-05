@@ -1,16 +1,24 @@
 import 'package:peanut_api_test/main.export.dart';
+import 'package:screwdriver/screwdriver.dart';
 
 class AuthRepo with ApiHandler {
   final _sp = locate<SP>();
 
-  bool isLoggedIn() => true;
+  bool isLoggedIn() => _sp.token.value != null && _sp.token.value!.isNotEmpty;
 
-  Future<bool> login(QMap data) async {
-    return _setToken('MOCK_TOKEN');
-  }
-
-  Future<bool> signUp(QMap data) async {
-    return _setToken('MOCK_TOKEN');
+  FutureReport<bool> login(QMap data) async {
+    return await handle(
+      call: () => client.post(Endpoints.login, data: data),
+      mapper: (map) {
+        if (map case {'result': final bool result, 'token': final String token}) {
+          if (result && token.isNotBlank) {
+            _setToken(token);
+            return true;
+          }
+        }
+        throw const Failure('Unable to login. Check your credentials.');
+      },
+    );
   }
 
   Future<bool> logout() async {
@@ -18,6 +26,7 @@ class AuthRepo with ApiHandler {
   }
 
   Future<bool> _setToken(String? token) async {
-    return true;
+    if (token == null) return _sp.token.remove();
+    return _sp.token.setValue(token);
   }
 }

@@ -5,24 +5,7 @@ import 'package:peanut_api_test/main.export.dart';
 
 mixin ApiHandler {
   DioClient get client => locate<DioClient>();
-
-  FutureReport<Base<T>> handleBase<T>({
-    required Future<Response> Function() call,
-    required T Function(Map<String, dynamic> map) mapper,
-  }) async {
-    try {
-      return handle(
-        call: call,
-        mapper: (data) {
-          final model = Base.fromMap(data, (v) => mapper(v));
-          return model;
-        },
-      );
-    } catch (e, s) {
-      catErr('ApiHandler', e, s);
-      return failure('Unexpected error.', e: e, s: s);
-    }
-  }
+  String? getToken() => locate<SP>().token.value;
 
   FutureReport<T> handle<T>({
     required Future<Response> Function() call,
@@ -35,13 +18,9 @@ mixin ApiHandler {
           Map<String, dynamic> decoded = {};
 
           if (data case final Map<String, dynamic> decode) decoded = decode;
-          if (data case final String decode when !decode.startsWith('<!doctype html>')) {
+          if (data case final String decode when !decode.low.startsWith('<!doctype html>')) {
             final parsed = jsonDecode(decode);
-            if (parsed is Map<String, dynamic>) {
-              decoded = parsed;
-            } else {
-              decoded = {'data': parsed};
-            }
+            if (parsed is Map<String, dynamic>) decoded = parsed;
           }
 
           return mapper(decoded);
@@ -78,35 +57,19 @@ extension DioErrorX on DioException {
   Failure toFailure() {
     // No internet or connection issues
     try {
-      if (type == DioExceptionType.connectionError ||
-          type == DioExceptionType.connectionTimeout ||
-          type == DioExceptionType.unknown) {
+      if (type == .connectionError || type == .connectionTimeout || type == .unknown) {
         return const Failure('No internet connection.');
       }
 
       // Timeout
-      if (type == DioExceptionType.receiveTimeout || type == DioExceptionType.sendTimeout) {
-        return const Failure('Connection timed out.');
-      }
+      if (type == .receiveTimeout || type == .sendTimeout) return const Failure('Connection timed out.');
 
       final status = response?.statusCode ?? 0;
 
       var res = response?.data;
 
-      if (res case final String s when !s.startsWith('<!DOCTYPE html>')) res = jsonDecode(s);
-
-      final serverMessage = switch (res) {
-        // Server error message ignoring ZOD
-        {'message': final String msg} when msg != 'Zod Validation Error' => msg,
-        // ZOD validation error message
-        {'errorSources': final List list} when list.isNotEmpty =>
-          list.firstOrNull is Map ? list.first['message'] : null,
-        _ => null,
-      };
-
-      if (serverMessage != null && serverMessage.isNotEmpty) {
-        return Failure(serverMessage, error: this, stackTrace: stackTrace);
-      }
+      if (res case final String s when !s.low.startsWith('<!doctype html>')) res = jsonDecode(s);
+      cat(res, 'DIO_ERROR');
 
       return Failure('Something went wrong. (code $status)', error: this, stackTrace: stackTrace);
     } catch (e, s) {

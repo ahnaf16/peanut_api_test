@@ -12,7 +12,7 @@ class AppToast extends StatelessWidget {
     final bgColor = context.colors.surfaceContainer;
 
     final color = switch (event.type) {
-      .success => Colors.greenAccent,
+      .success => Colors.green.shade600,
       .error => context.colors.error,
       .info => context.colors.primary,
     };
@@ -77,6 +77,7 @@ class AppToast extends StatelessWidget {
             ),
             Positioned(
               top: 0,
+              bottom: 0,
               right: 0,
               child: GestureDetector(
                 onTap: closer,

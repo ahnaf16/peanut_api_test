@@ -15,6 +15,7 @@ export 'network/api_handler.dart';
 export 'network/dio_client.dart';
 export 'network/endpoints.dart';
 export 'storage/shared_pref.dart';
+export 'storage/shared_pref_gen.dart';
 export 'strings/app_const.dart';
 export 'strings/auto_fill.dart';
 export 'type_def/helper_types.dart.dart';

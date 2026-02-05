@@ -16,10 +16,15 @@ class Endpoints {
   static bool get isTestUrl => testURL != null && !kReleaseMode;
 
   // base url
-  static const String _baseUrl = 'https://api.peanut_api_test.com';
-  static const String _apiSuffix = 'api/user';
+  static const String _baseUrl = 'https://peanut.ifxdb.com';
+  static const String _apiSuffix = 'api/ClientCabinetBasic';
 
   static String get _host => '${isTestUrl ? testURL : _baseUrl}';
 
-  static String get clientApi => '$_host/$_apiSuffix';
+  static String get clientApi => '$_host/$_apiSuffix/';
+
+  static EndPoint get login => const EndPoint('IsAccountCredentialsCorrect');
+  static EndPoint get accountInformation => const EndPoint('GetAccountInformation');
+  static EndPoint get lastFourNumber => const EndPoint('GetLastFourNumbersPhone');
+  static EndPoint get trades => const EndPoint('GetOpenTrades');
 }

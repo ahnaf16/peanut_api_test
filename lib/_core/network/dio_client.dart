@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:peanut_api_test/main.export.dart';
 
 export 'package:dio/dio.dart';
@@ -21,13 +19,6 @@ class DioClient {
     sendTimeout: const Duration(seconds: 30),
     headers: {'Accept': 'application/json'},
   );
-
-  Future<Map<String, String?>> header() async {
-    // final sp = locate<SP>();
-    const token = ''; //sp.accessToken.value;
-
-    return {HttpHeaders.authorizationHeader: 'Bearer $token'};
-  }
 
   // Get:-----------------------------------------------------------------------
   Future<Response> get(
@@ -55,11 +46,9 @@ class DioClient {
     ProgressCallback? onReceiveProgress,
   }) async {
     try {
-      final formData = data == null ? null : FormData.fromMap(data, ListFormat.multiCompatible);
-
       final Response response = await _dio.post(
         url,
-        data: formData,
+        data: data,
         options: options,
         cancelToken: cancelToken,
         onSendProgress: onSendProgress,
@@ -116,8 +105,6 @@ class DioClient {
   // Interceptors :----------------------------------------------------------------------
   InterceptorsWrapper _interceptorsWrapper() => InterceptorsWrapper(
     onRequest: (options, handler) async {
-      final headers = await header();
-      options.headers.addAll(headers);
       return handler.next(options);
     },
     onResponse: (res, handler) async {

@@ -59,11 +59,11 @@ class AppRouter extends Notifier<GoRouter> {
       final current = state.uri.toString();
       cat(current, 'route redirect');
 
-      // if (!isLoggedIn) {
-      //   cat('NOT LOGGED IN', 'route');
-      //   if (current.contains(RPaths.login.path)) return null;
-      //   return RPaths.login.path;
-      // }
+      if (!isLoggedIn) {
+        cat('NOT LOGGED IN', 'route');
+        if (current.contains(RPaths.login.path)) return null;
+        return RPaths.login.path;
+      }
 
       return null;
     }

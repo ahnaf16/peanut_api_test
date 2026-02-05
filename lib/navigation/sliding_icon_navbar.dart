@@ -7,12 +7,6 @@ class SlidingIconNavbar extends StatelessWidget {
   final int currentIndex;
   final ValueChanged<int> onTap;
 
-  /// toggles overlay at this index
-  final int? showOverlayAt;
-
-  /// builds the overlay widget
-  final WidgetBuilder? overlayBuilder;
-
   final double height;
   final Duration animationDuration;
 
@@ -22,96 +16,41 @@ class SlidingIconNavbar extends StatelessWidget {
     required this.labels,
     required this.currentIndex,
     required this.onTap,
-    this.showOverlayAt,
-    this.overlayBuilder,
     this.height = kBottomNavigationBarHeight,
     this.animationDuration = const Duration(milliseconds: 300),
   }) : assert(icons.length == labels.length, 'Icons and Labels must be the same length');
 
   @override
   Widget build(BuildContext context) {
-    final double alignmentX = -1.0 + (currentIndex * (2 / (icons.length - 1)));
-
-    final backgroundColor = context.colors.surfaceContainer;
+    final backgroundColor = context.colors.surfaceContainerHighest;
     final sliderColor = context.colors.onPrimary;
     final activeColor = context.colors.primary;
     final inactiveColor = context.colors.onSurface;
 
     return DecoContainer(
       color: backgroundColor,
-      borderRadius: 24,
+      borderRadius: 999,
       height: kBottomNavigationBarHeight,
-      margin: Pads.sym(8, 10).copyWith(bottom: context.padding.bottom + 5),
+      margin: Pads.sym(16).copyWith(bottom: context.padding.bottom + 10),
       padding: const EdgeInsets.symmetric(horizontal: 8),
-      child: Stack(
-        children: [
-          AnimatedAlign(
-            duration: animationDuration,
-            curve: Curves.easeInOutCubic,
-            alignment: Alignment(alignmentX, 0),
-            child: FractionallySizedBox(
-              widthFactor: 1 / (icons.length - 1.5),
-              child: Container(
-                height: height * 0.70,
-                decoration: BoxDecoration(
-                  color: sliderColor,
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [BoxShadow(color: Colors.black.op(0.05), blurRadius: 10)],
-                ),
-              ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: List.generate(icons.length, (index) {
+          final isSelected = currentIndex == index;
+          return GestureDetector(
+            onTap: () {
+              onTap(index);
+            },
+            behavior: .opaque,
+            child: DecoContainer.animated(
+              duration: animationDuration,
+              padding: Pads.sym(30, 8),
+              color: isSelected ? sliderColor : backgroundColor,
+              borderRadius: 999,
+              child: Icon(icons[index], size: 20, color: isSelected ? activeColor : inactiveColor),
             ),
-          ),
-
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: List.generate(icons.length, (index) {
-              final isSelected = currentIndex == index;
-
-              return GestureDetector(
-                onTap: () {
-                  onTap(index);
-                  if (index == showOverlayAt && overlayBuilder != null) {
-                    showModalBottomSheet(
-                      context: context,
-                      backgroundColor: Colors.transparent,
-                      builder: (context) => overlayBuilder!(context),
-                    );
-                  }
-                },
-                behavior: HitTestBehavior.opaque,
-                child: Center(
-                  child: AnimatedContainer(
-                    duration: animationDuration,
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(icons[index], color: isSelected ? activeColor : inactiveColor),
-                        ClipRect(
-                          child: AnimatedSize(
-                            duration: animationDuration,
-                            curve: Curves.easeInOut,
-                            child: isSelected
-                                ? Padding(
-                                    padding: const EdgeInsets.only(left: 8.0),
-                                    child: Text(
-                                      labels[index],
-                                      style: context.text.bodyMedium!.textColor(
-                                        isSelected ? activeColor : inactiveColor,
-                                      ),
-                                    ),
-                                  )
-                                : const SizedBox.shrink(),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              );
-            }),
-          ),
-        ],
+          );
+        }),
       ),
     );
   }

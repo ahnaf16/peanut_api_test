@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:peanut_api_test/main.export.dart';
 
 void cat(dynamic msg, [dynamic name]) => Cat._(name?.toString()).log(msg);
 void catErr(String name, Object? error, [StackTrace? stackTrace]) => Cat._(name).logErr(error, stackTrace);
@@ -86,10 +87,9 @@ class LogHelper {
           buffer.write('$keyPart $j$vPart');
         }
         //?? file
-        // else if (v is FormData) {
-        //   buffer.write('${'  ' * l}${_colorKey(k)}:\n${jsonMap(l + 1, v)}');
-        // }
-        else {
+        else if (v is FormData) {
+          buffer.write('${'  ' * l}${_colorKey(k)}:\n${jsonMap(l + 1, v)}');
+        } else {
           buffer.write('${'  ' * l}${_keyValue(k, v)}');
         }
 
@@ -99,10 +99,9 @@ class LogHelper {
       buffer.write(jsonList(l, json));
     }
     //?? dio
-    //  else if (json is FormData) {
-    //   buffer.write(_processFormData(json, l));
-    // }
-    else {
+    else if (json is FormData) {
+      buffer.write(_processFormData(json, l));
+    } else {
       buffer.write('${'  ' * l}${_colorValue(json)}');
     }
 
@@ -116,7 +115,7 @@ class LogHelper {
       final item = list[i];
       final isLast = i == list.length - 1;
       //?? dio
-      if (item is Map || item is List /* || item is FormData */ ) {
+      if (item is Map || item is List || item is FormData) {
         buffer.write('${'  ' * l}-\n${jsonMap(l + 1, item)}');
       } else {
         buffer.write('${'  ' * l}- ${_colorValue(item)}');
@@ -139,8 +138,9 @@ class LogHelper {
       return _colorValue('"${value.path}"(FILE)');
     }
     //?? dio
-    //  else if (value is MultipartFile) {
-    //   return _colorValue('"${value.filename ?? value.toString()}"(MULTIPART)');
+    else if (value is MultipartFile) {
+      return _colorValue('"${value.filename ?? value.toString()}"(MULTIPART)');
+    }
     //?? file
     // } else if (value is PlatformFile) {
     //   return _colorValue('"${value.path}"(PLATFORM)');
@@ -167,19 +167,19 @@ class LogHelper {
   String kvLine(String key, Object? v) => _line(1, _keyValue(key, v));
 
   //?? dio
-  // String _processFormData(FormData formData, int l) {
-  //   String str = '';
-  //   for (var field in formData.fields) {
-  //     str += '${'  ' * l}${_colorKey(field.key)}: ${_colorValue(field.value)}\n';
-  //   }
+  String _processFormData(FormData formData, int l) {
+    String str = '';
+    for (var field in formData.fields) {
+      str += '${'  ' * l}${_colorKey(field.key)}: ${_colorValue(field.value)}\n';
+    }
 
-  //   for (var file in formData.files) {
-  //     str +=
-  //         '${'  ' * l}${_colorKey(file.key)}: ${_colorValue(file.value.filename ?? file.value.toString())}(MULTIPART)\n';
-  //   }
+    for (var file in formData.files) {
+      str +=
+          '${'  ' * l}${_colorKey(file.key)}: ${_colorValue(file.value.filename ?? file.value.toString())}(MULTIPART)\n';
+    }
 
-  //   return str;
-  // }
+    return str;
+  }
 
   String _keyValue(dynamic key, dynamic value) => '${_colorKey(key)}: ${valueParse(value)}';
 
