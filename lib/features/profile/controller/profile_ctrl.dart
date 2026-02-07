@@ -36,12 +36,3 @@ double totalTradesProfit(Ref ref) {
     orElse: () => 0.0,
   );
 }
-
-// final totalOpenTradesProfitProvider = Provider<double>((ref) {
-//   final tradesAsync = ref.watch(tradeCtrlProvider);
-
-//   return tradesAsync.maybeWhen(
-//     data: (trades) => trades.fold(0.0, (sum, trade) => sum + trade.profit.toDouble()),
-//     orElse: () => 0.0,
-//   );
-// });
