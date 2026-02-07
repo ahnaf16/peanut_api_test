@@ -13,10 +13,14 @@ class AuthCtrl extends _$AuthCtrl {
     return _repo.isLoggedIn();
   }
 
-  FVoid login(QMap data) async {
-    final res = await _repo.login(data);
+  FVoid login(QMap data, bool remember) async {
+    final res = await _repo.login(data, remember);
     res.fold((l) => toaster.showError('Login Failed', message: l.msg), (r) => ref.invalidateSelf());
     return;
+  }
+
+  Map<String, String> getSavedLoginData() {
+    return _repo.savedLoginData();
   }
 
   FVoid logout() async {

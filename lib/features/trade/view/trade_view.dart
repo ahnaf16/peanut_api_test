@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:peanut_api_test/features/trade/controller/trade_ctrl.dart';
 import 'package:peanut_api_test/features/trade/view/trade_card.dart';
 import 'package:peanut_api_test/features/trade/view/trade_profit_header.dart';
@@ -18,22 +19,53 @@ class TradeView extends HookConsumerWidget {
         child: tradesAsync.when(
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (e, st) => Center(child: Text('Error: $e')),
-          data: (trades) => ListView(
-            padding: Pads.lg(),
-            children: [
-              const TotalTradesProfitHeader(),
-              const Gap(Insets.sm),
-              Text(
-                '${trades.length} Active Positions',
-                style: const TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
-              ),
-              const Gap(Insets.sm),
+          data: (trades) {
+            return CustomScrollView(
+              slivers: [
+                SliverPadding(
+                  padding: Pads.lg('lr'),
+                  sliver: SliverList.list(
+                    children: [
+                      const TotalTradesProfitHeader(),
+                      const Gap(Insets.sm),
+                      Text(
+                        '${trades.length} Active Positions',
+                        style: const TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
+                      ),
+                      const Gap(Insets.sm),
+                    ],
+                  ),
+                ),
 
-              ...trades.map((trade) => TradeCard(trade: trade)).gapBy(Insets.med),
+                if (context.isLandscape)
+                  SliverPadding(
+                    padding: Pads.lg('lr'),
+                    sliver: SliverMasonryGrid(
+                      crossAxisSpacing: Insets.med,
+                      mainAxisSpacing: Insets.med,
+                      delegate: SliverChildBuilderDelegate(childCount: trades.length, (context, index) {
+                        final trade = trades[index];
+                        return TradeCard(trade: trade);
+                      }),
+                      gridDelegate: const SliverSimpleGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                    ),
+                  )
+                else
+                  SliverPadding(
+                    padding: Pads.lg('lr'),
+                    sliver: SliverList.builder(
+                      itemCount: trades.length,
+                      itemBuilder: (context, index) {
+                        final trade = trades[index];
+                        return TradeCard(trade: trade);
+                      },
+                    ),
+                  ),
 
-              const Gap(Insets.lg),
-            ],
-          ),
+                const SliverGap(Insets.lg),
+              ],
+            );
+          },
         ),
       ),
     );

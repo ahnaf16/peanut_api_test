@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:peanut_api_test/features/dashboard/view/profit_summary_card.dart';
 import 'package:peanut_api_test/features/profile/controller/profile_ctrl.dart';
 import 'package:peanut_api_test/features/trade/controller/trade_ctrl.dart';
@@ -94,11 +95,23 @@ class DashboardView extends HookConsumerWidget {
                       ).toSliver(),
                     ),
                     data: (trades) {
-                      return SliverList.separated(
-                        itemCount: trades.length,
-                        separatorBuilder: (_, _) => const Gap(Insets.lg),
-                        itemBuilder: (context, index) => TradeCard(trade: trades[index]),
-                      );
+                      if (context.isLandscape) {
+                        return SliverMasonryGrid(
+                          crossAxisSpacing: Insets.med,
+                          mainAxisSpacing: Insets.med,
+                          delegate: SliverChildBuilderDelegate(childCount: trades.length, (context, index) {
+                            final trade = trades[index];
+                            return TradeCard(trade: trade);
+                          }),
+                          gridDelegate: const SliverSimpleGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                        );
+                      } else {
+                        return SliverList.separated(
+                          itemCount: trades.length,
+                          separatorBuilder: (_, _) => const Gap(Insets.lg),
+                          itemBuilder: (context, index) => TradeCard(trade: trades[index]),
+                        );
+                      }
                     },
                   ),
                 ],

@@ -67,7 +67,7 @@ class KTextField extends HookWidget {
           (isPasswordField
               ? IconButton(
                   onPressed: () => hidePass.value = !hidePass.value,
-                  icon: hidePass.value ? const Icon(Icons.visibility_off) : const Icon(Icons.visibility),
+                  icon: hidePass.value ? const Icon(LIcon.eyeOff) : const Icon(LIcon.eye),
                 )
               : null),
       border: KAppTheme.inputBorder().copyWith(borderRadius: borderRadius),
@@ -85,6 +85,7 @@ class KTextField extends HookWidget {
       decoration: inputDecor,
       maxLength: maxLength,
       onChanged: onChanged,
+      onTapOutside: (event) => FocusScope.of(context).unfocus(),
     );
     if (name != null) {
       field = FormBuilderTextField(
@@ -100,6 +101,7 @@ class KTextField extends HookWidget {
         decoration: inputDecor,
         validator: FormBuilderValidators.compose([if (isRequired) FormBuilderValidators.required(), ...validators]),
         onChanged: (v) => onChanged?.call(v ?? ''),
+        onTapOutside: (event) => FocusScope.of(context).unfocus(),
       );
     }
 

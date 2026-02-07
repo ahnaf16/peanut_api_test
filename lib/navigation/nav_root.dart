@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:peanut_api_test/main.export.dart';
-import 'package:peanut_api_test/navigation/sliding_icon_navbar.dart';
+import 'package:peanut_api_test/navigation/bottom_navbar.dart';
 
 class NavigationRoot extends HookConsumerWidget {
   const NavigationRoot(this.child, {super.key});
@@ -25,17 +25,38 @@ class NavigationRoot extends HookConsumerWidget {
     }, [rootPath]);
 
     return Scaffold(
-      bottomNavigationBar: SlidingIconNavbar(
-        icons: destinations.values.map((e) => e.icon).toList(),
-        labels: destinations.values.map((e) => e.text).toList(),
-        currentIndex: index.value,
-        onTap: (value) {
-          index.value = value;
-          destinations.keys.elementAt(value).go(context);
-        },
-      ),
+      bottomNavigationBar: context.isLandscape
+          ? null
+          : BottomNavbar(
+              icons: destinations.values.map((e) => e.icon).toList(),
+              labels: destinations.values.map((e) => e.text).toList(),
+              currentIndex: index.value,
+              onTap: (value) {
+                index.value = value;
+                destinations.keys.elementAt(value).go(context);
+              },
+            ),
 
-      body: child,
+      body: context.isLandscape
+          ? Row(
+              children: [
+                ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: kBottomNavigationBarHeight),
+                  child: BottomNavbar(
+                    icons: destinations.values.map((e) => e.icon).toList(),
+                    labels: destinations.values.map((e) => e.text).toList(),
+                    currentIndex: index.value,
+                    isVertical: true,
+                    onTap: (value) {
+                      index.value = value;
+                      destinations.keys.elementAt(value).go(context);
+                    },
+                  ),
+                ),
+                Expanded(child: child),
+              ],
+            )
+          : child,
     );
   }
 }

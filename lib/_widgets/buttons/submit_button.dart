@@ -74,7 +74,7 @@ class SubmitButton extends HookWidget {
         try {
           if (!enabled || loading.value) return;
 
-          onPressed?.call(loading);
+          await onPressed?.call(loading);
         } catch (_) {
           loading.falsey();
           rethrow;
@@ -99,12 +99,9 @@ class SubmitButton extends HookWidget {
               mainAxisAlignment: .center,
               spacing: expanded ? 12 : 8,
               children: [
-                if (loading.value)
-                  LoadingIndicator(indicatorColor: getContentColor())
-                else if (leading != null)
-                  leading!,
+                if (loading.value) LoadingIndicator(indicatorColor: getContentColor()) else ?leading,
                 Text(label, style: context.text.labelLarge?.textColor(getContentColor()), overflow: .ellipsis),
-                if (trailing != null) trailing!,
+                ?trailing,
               ],
             ),
           ),
