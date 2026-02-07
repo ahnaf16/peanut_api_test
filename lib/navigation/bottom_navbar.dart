@@ -30,7 +30,7 @@ class BottomNavbar extends StatelessWidget {
     final inactiveColor = context.colors.onSurface;
 
     final margin = isVertical
-        ? Pads.sym(1, 20).copyWith(left: context.padding.bottom + 4)
+        ? Pads.sym(1, 20).copyWith(left: context.padding.bottom + 10)
         : Pads.sym(16).copyWith(bottom: context.padding.bottom + 10);
 
     final List<Widget> navItems = List.generate(icons.length, (index) {
@@ -52,9 +52,9 @@ class BottomNavbar extends StatelessWidget {
       color: backgroundColor,
       borderRadius: 999,
       height: isVertical ? double.infinity : height,
-      width: isVertical ? height : null,
+      width: isVertical ? height + 10 : null,
       margin: margin,
-      padding: isVertical ? const EdgeInsets.symmetric(vertical: 8) : const EdgeInsets.symmetric(horizontal: 8),
+      padding: isVertical ? Pads.sym(6, 8) : const EdgeInsets.symmetric(horizontal: 8),
       child: isVertical
           ? Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: navItems)
           : Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: navItems),
