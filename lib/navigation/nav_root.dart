@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:peanut_api_test/main.export.dart';
-import 'package:peanut_api_test/navigation/bottom_navbar.dart';
+import 'package:peanut_api_test/navigation/navbar.dart';
 
 class NavigationRoot extends HookConsumerWidget {
   const NavigationRoot(this.child, {super.key});
@@ -27,7 +27,7 @@ class NavigationRoot extends HookConsumerWidget {
     return Scaffold(
       bottomNavigationBar: context.isLandscape
           ? null
-          : BottomNavbar(
+          : Navbar(
               icons: destinations.values.map((e) => e.icon).toList(),
               labels: destinations.values.map((e) => e.text).toList(),
               currentIndex: index.value,
@@ -40,18 +40,15 @@ class NavigationRoot extends HookConsumerWidget {
       body: context.isLandscape
           ? Row(
               children: [
-                ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: kBottomNavigationBarHeight),
-                  child: BottomNavbar(
-                    icons: destinations.values.map((e) => e.icon).toList(),
-                    labels: destinations.values.map((e) => e.text).toList(),
-                    currentIndex: index.value,
-                    isVertical: true,
-                    onTap: (value) {
-                      index.value = value;
-                      destinations.keys.elementAt(value).go(context);
-                    },
-                  ),
+                Navbar(
+                  icons: destinations.values.map((e) => e.icon).toList(),
+                  labels: destinations.values.map((e) => e.text).toList(),
+                  currentIndex: index.value,
+                  isVertical: true,
+                  onTap: (value) {
+                    index.value = value;
+                    destinations.keys.elementAt(value).go(context);
+                  },
                 ),
                 Expanded(child: child),
               ],

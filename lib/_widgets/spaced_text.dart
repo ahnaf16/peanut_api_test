@@ -15,6 +15,7 @@ class SpacedText extends StatelessWidget {
     this.onTap,
     this.styleBuilder,
     this.spaced = true,
+    this.centered = false,
   });
 
   static (TextStyle, TextStyle) buildStye(TextStyle left, TextStyle right) => (left, right);
@@ -32,6 +33,7 @@ class SpacedText extends StatelessWidget {
   /// Override style for left and right
   final StyleBuilder? styleBuilder;
   final bool spaced;
+  final bool centered;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,7 @@ class SpacedText extends StatelessWidget {
       onTap: onTap == null ? null : () => onTap?.call(left, right),
       borderRadius: Corners.lgBorder,
       child: Row(
-        mainAxisAlignment: spaced ? MainAxisAlignment.spaceBetween : MainAxisAlignment.start,
+        mainAxisAlignment: centered ? .center : (spaced ? MainAxisAlignment.spaceBetween : MainAxisAlignment.start),
         children: [
           Text('$left$separator', style: lSty),
           const Gap(Insets.med),

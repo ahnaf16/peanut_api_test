@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 import 'package:peanut_api_test/main.export.dart';
@@ -68,12 +66,5 @@ extension NumEx on num {
   bool get isInt {
     if (this is int) return true;
     return this == truncateToDouble();
-  }
-}
-
-extension ObjEx<T extends Object?> on T {
-  T log() {
-    if (!kReleaseMode) inspect(this);
-    return this;
   }
 }

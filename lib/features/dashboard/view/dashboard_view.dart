@@ -23,6 +23,8 @@ class DashboardView extends HookConsumerWidget {
         return Scaffold(
           appBar: AppBar(
             toolbarHeight: kToolbarHeight + 15,
+            elevation: 0,
+            scrolledUnderElevation: 0,
             title: Column(
               crossAxisAlignment: .start,
               spacing: 2,

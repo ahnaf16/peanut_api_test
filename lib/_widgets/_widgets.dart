@@ -11,7 +11,6 @@ export 'k_text_field.dart';
 export 'keyboard_visibillity.dart';
 export 'loading.dart';
 export 'option_selection.dart';
-export 'pop_over.dart';
 export 'read_more.dart';
 export 'refresher.dart';
 export 'smooth_expandable_widget.dart';
