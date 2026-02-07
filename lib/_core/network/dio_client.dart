@@ -39,7 +39,7 @@ class DioClient {
   // Post:----------------------------------------------------------------------
   Future<Response> post(
     String url, {
-    Map<String, dynamic>? data,
+    dynamic data,
     Options? options,
     CancelToken? cancelToken,
     ProgressCallback? onSendProgress,

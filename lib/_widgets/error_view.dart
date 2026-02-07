@@ -30,7 +30,7 @@ class ErrorView extends HookConsumerWidget {
           else
             Text('Please try again', style: context.text.bodyLarge, maxLines: 1),
           const Gap(Insets.xl),
-          if (prov.isNotEmpty)
+          if (prov.isNotEmpty || reload != null)
             OutlinedButton(
               onPressed: () async {
                 for (final p in prov) {
